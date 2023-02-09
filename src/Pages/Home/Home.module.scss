@@ -1,0 +1,28 @@
+.wrapper {
+    background-color: #9f1917;
+    background-image: url('./../../Images/poster-bg.jpeg');
+    width: 100vw;
+    height: 100vh;
+    background-size: contain;
+    .button {
+        position: absolute;
+        left: 25vw;
+        bottom: 27.5vh;
+        border: 1px solid #fff;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.25s ease-out;
+        &:hover {
+            background-color: rgba(255,255, 255, 0.2);
+        }
+        p {
+            margin: 20px 80px;
+            color: #fff;
+            font-size: 25px;
+            font-weight: 600;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    }
+}

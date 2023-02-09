@@ -1,0 +1,26 @@
+.wrapper {
+    background-color: #9f1917;
+    background-image: url('./../../Images/poster-bg.jpeg');
+    width: 100vw;
+    height: 100vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    .form {
+        position: absolute;
+        left: 10vw;
+        bottom: 17.5vh;
+        border: 1px solid #fff;
+        border-radius: 25px;
+        width: 50vw;
+        height: 25vh;
+        background-color: rgba(255,255, 255, 0.5);
+        overflow-y: auto;
+        .form-wrapper {
+            width: 100%;
+            border-radius: 25px;
+            padding: 15px;
+            max-height: 25vh;
+        }
+    }
+}
