@@ -21,6 +21,9 @@ export interface IKandidat {
   occupation: string,
   maritalStatus: string,
   email: string,
+  photo: string,
+  ktp: string,
+  ijazah: string,
   deletedAt: Date | null,
   createdAt: Date,
   updatedAt: Date,
@@ -46,4 +49,6 @@ export interface IKandidatPost {
   maritalStatus: string,
   email: string,
   photo: string,
+  ktp: string,
+  ijazah: string,
 }

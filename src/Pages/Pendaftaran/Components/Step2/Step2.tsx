@@ -47,7 +47,9 @@ type candidateKey =
   | "occupation"
   | "maritalStatus"
   | "photo"
-  | "email";
+  | "email"
+  | "ktp"
+  | "ijazah";
 
 function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
   const { getPendaftaranById, pendaftaranDetail } = usePendaftaran();
@@ -57,6 +59,8 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
 
   const [loadingUpload, setLoading] = React.useState<boolean>(false);
   const [photo, setPhoto] = React.useState<string[]>([]);
+  const [ktp, setKTP] = React.useState<string[]>([]);
+  const [ijazah, setIjazah] = React.useState<string[]>([]);
   const [current, setCurrent] = React.useState(1);
   const [candidates, setCandidates] = React.useState<IKandidatPost[]>([]);
 
@@ -88,6 +92,38 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
     }
   };
 
+  const handleUploadKTP: UploadProps["onChange"] = (
+    info: UploadChangeParam<UploadFile>
+  ) => {
+    if (info.file.status === "uploading") {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === "done") {
+      // Get this url from response in real world.
+      setLoading(false);
+      const newKTP = [...ktp];
+      newKTP[current - 1] = `${API_URL}${info.file.response.data}`;
+      setKTP(newKTP);
+    }
+  };
+
+  const handleUploadIjazah: UploadProps["onChange"] = (
+    info: UploadChangeParam<UploadFile>
+  ) => {
+    if (info.file.status === "uploading") {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === "done") {
+      // Get this url from response in real world.
+      setLoading(false);
+      const newIjazah = [...ijazah];
+      newIjazah[current - 1] = `${API_URL}${info.file.response.data}`;
+      setIjazah(newIjazah);
+    }
+  };
+
   const onChangePage: PaginationProps["onChange"] = (page) => {
     setCurrent(page);
   };
@@ -115,9 +151,13 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         maritalStatus: "",
         email: "",
         photo: "",
+        ktp: "",
+        ijazah: "",
       });
       setCandidates(newCandidates);
       setPhoto(newPhoto);
+      setKTP(newPhoto);
+      setIjazah(newPhoto);
     });
   }, [registrationId]);
 
@@ -127,7 +167,13 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
       candidates.forEach(async (element) => {
         const keys = Object.keys(element);
         keys.forEach((key) => {
-          if (key === "rhesusType" || key === "photo") return;
+          if (
+            key === "rhesusType" ||
+            key === "photo" ||
+            key === "ktp" ||
+            key === "ijazah"
+          )
+            return;
           if (
             element[key as candidateKey] === "" ||
             !element[key as candidateKey]
@@ -372,6 +418,48 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             {photo[current] ? (
               <img
                 src={`${IMAGE_URL}${photo[current]}`}
+                alt="avatar"
+                style={{ width: 100, height: 100, objectFit: "contain" }}
+              />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
+        </div>
+        <div className={Styles["form-item"]}>
+          <p className={Styles["title"]}>Foto KTP</p>
+          <Upload
+            action={API_URL + "/uploads"}
+            name="file"
+            listType="picture-card"
+            beforeUpload={beforeUpload}
+            onChange={handleUploadKTP}
+            showUploadList={false}
+          >
+            {ktp[current] ? (
+              <img
+                src={`${IMAGE_URL}${ktp[current]}`}
+                alt="avatar"
+                style={{ width: 100, height: 100, objectFit: "contain" }}
+              />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
+        </div>
+        <div className={Styles["form-item"]}>
+          <p className={Styles["title"]}>Foto Ijazah</p>
+          <Upload
+            action={API_URL + "/uploads"}
+            name="file"
+            listType="picture-card"
+            beforeUpload={beforeUpload}
+            onChange={handleUploadIjazah}
+            showUploadList={false}
+          >
+            {ijazah[current] ? (
+              <img
+                src={`${IMAGE_URL}${ijazah[current]}`}
                 alt="avatar"
                 style={{ width: 100, height: 100, objectFit: "contain" }}
               />
