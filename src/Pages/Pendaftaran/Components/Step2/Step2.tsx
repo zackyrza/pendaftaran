@@ -121,15 +121,15 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
   const onSubmit = async () => {
     try {
       let anyEmpty = false;
-      await candidates.forEach(async (element) => {
+      candidates.forEach(async (element) => {
         const keys = Object.keys(element);
-        await keys.forEach((key) => {
+        keys.forEach((key) => {
+          if (key === "rhesusType" || key === "photo") return;
           if (
             element[key as candidateKey] === "" ||
-            (!element[key as candidateKey] &&
-              key !== "rhesusType" &&
-              key !== "photo")
+            !element[key as candidateKey]
           ) {
+            console.log(key, "==============================");
             anyEmpty = true;
           }
         });
@@ -138,8 +138,8 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         messageApi.error("Mohon isi semua data");
         return;
       }
-      await candidates.forEach(async (element) => {
-        await createKandidat(element);
+      candidates.forEach(async (element) => {
+        createKandidat(element);
       });
       messageApi.success("Para peserta berhasil didaftarkan");
       setTimeout(() => {
