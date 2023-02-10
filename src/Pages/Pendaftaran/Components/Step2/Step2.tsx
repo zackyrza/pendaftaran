@@ -53,7 +53,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
   const [messageApi, contextHolder] = message.useMessage();
 
   const [loadingUpload, setLoading] = React.useState<boolean>(false);
-  const [photo, setPhoto] = React.useState<string>("");
+  const [photo, setPhoto] = React.useState<string[]>([]);
   const [current, setCurrent] = React.useState(1);
   const [candidates, setCandidates] = React.useState<IKandidatPost[]>([]);
 
@@ -79,7 +79,9 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
     if (info.file.status === "done") {
       // Get this url from response in real world.
       setLoading(false);
-      setPhoto(info.file.response.data);
+      const newPhoto = [...photo];
+      newPhoto[current - 1] = `${API_URL}${info.file.response.data}`;
+      setPhoto(newPhoto);
     }
   };
 
@@ -89,6 +91,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
 
   React.useEffect(() => {
     getPendaftaranById(registrationId).then((res) => {
+      const newPhoto = new Array(res.quantity).fill("");
       const newCandidates = new Array(res.quantity).fill({
         name: "",
         registrationId,
@@ -111,6 +114,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         photo: "",
       });
       setCandidates(newCandidates);
+      setPhoto(newPhoto);
     });
   }, [registrationId]);
 
@@ -122,7 +126,9 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         await keys.forEach((key) => {
           if (
             element[key as candidateKey] === "" ||
-            (!element[key as candidateKey] && key !== "rhesusType")
+            (!element[key as candidateKey] &&
+              key !== "rhesusType" &&
+              key !== "photo")
           ) {
             anyEmpty = true;
           }
@@ -360,11 +366,11 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             onChange={handleUpload}
             showUploadList={false}
           >
-            {photo ? (
+            {photo[current] ? (
               <img
-                src={`${IMAGE_URL}${photo}`}
+                src={`${IMAGE_URL}${photo[current]}`}
                 alt="avatar"
-                style={{ width: 100, height: 200, objectFit: "contain" }}
+                style={{ width: 100, height: 100, objectFit: "contain" }}
               />
             ) : (
               uploadButton
