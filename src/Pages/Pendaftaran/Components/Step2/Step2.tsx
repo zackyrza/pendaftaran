@@ -129,7 +129,6 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             element[key as candidateKey] === "" ||
             !element[key as candidateKey]
           ) {
-            console.log(key, "==============================");
             anyEmpty = true;
           }
         });
