@@ -2,8 +2,9 @@ import React from "react";
 import Styles from "./Step2.module.scss";
 
 import dayjs from "dayjs";
-import { Button, DatePickerProps } from "antd";
 import {
+  Button,
+  DatePickerProps,
   Input,
   PaginationProps,
   Pagination,
@@ -25,6 +26,7 @@ import { IKandidatPost } from "Helpers/Interface/Kandidat";
 import { useKandidat } from "Helpers/Hooks/Api/useKandidat";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { API_URL, IMAGE_URL } from "Config";
+import { useMail } from "Helpers/Hooks/Api/useMail";
 
 type candidateKey =
   | "name"
@@ -50,6 +52,7 @@ type candidateKey =
 function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
   const { getPendaftaranById, pendaftaranDetail } = usePendaftaran();
   const { createKandidat } = useKandidat();
+  const { sendSecondStepMail } = useMail();
   const [messageApi, contextHolder] = message.useMessage();
 
   const [loadingUpload, setLoading] = React.useState<boolean>(false);
@@ -141,6 +144,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         createKandidat(element);
       });
       messageApi.success("Para peserta berhasil didaftarkan");
+      sendSecondStepMail(pendaftaranDetail.classId, pendaftaranDetail.cityId);
       setTimeout(() => {
         onSuccessfulSubmit();
       }, 1000);

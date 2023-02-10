@@ -10,6 +10,7 @@ import { useKategori } from "Helpers/Hooks/Api/useKategori";
 import { usePendaftaran } from "Helpers/Hooks/Api/usePendaftaran";
 import { useGender } from "Helpers/Hooks/Api/useGender";
 import { IMAGE_URL } from "Config";
+import { useMail } from "Helpers/Hooks/Api/useMail";
 
 function Step1({ goToStep2 }: IStep1Props) {
   const [messageApi, contextHolder] = message.useMessage();
@@ -19,6 +20,8 @@ function Step1({ goToStep2 }: IStep1Props) {
   const { getKategoriBySportId, kategori } = useKategori();
   const { getGender, gender } = useGender();
   const { createPendaftaran } = usePendaftaran();
+  const { sendFirstStepMail } = useMail();
+
   const [quantity, setQuantity] = React.useState<number>();
   const [cityId, setCityId] = React.useState<number | undefined>(undefined);
   const [caborId, setCaborId] = React.useState<number | undefined>(undefined);
@@ -56,6 +59,7 @@ function Step1({ goToStep2 }: IStep1Props) {
       sportGenderId,
     })
       .then((res) => {
+        sendFirstStepMail(caborId, cityId);
         messageApi.success("Pendaftaran berhasil");
         setTimeout(() => goToStep2(res.id), 1000);
       })
