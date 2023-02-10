@@ -26,9 +26,6 @@ function Step1({ goToStep2 }: IStep1Props) {
   const [sportGenderId, setSportGenderId] = React.useState<number | undefined>(
     undefined
   );
-  const [userId] = React.useState<number>(
-    JSON.parse(localStorage.getItem("user") ?? "{}").id ?? 0
-  );
 
   const onClickDaftar = () => {
     if (!quantity) {
@@ -51,15 +48,11 @@ function Step1({ goToStep2 }: IStep1Props) {
       messageApi.error("Jenis kelamin harus diisi");
       return;
     }
-    if (!userId) {
-      messageApi.error("Anda harus login terlebih dahulu!");
-      return;
-    }
     createPendaftaran({
       quantity,
       cityId,
       classId,
-      userId,
+      email: localStorage.getItem("email") ?? "",
       sportGenderId,
     })
       .then((res) => {

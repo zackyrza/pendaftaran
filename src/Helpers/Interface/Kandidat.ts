@@ -45,4 +45,5 @@ export interface IKandidatPost {
   occupation: string,
   maritalStatus: string,
   email: string,
+  photo: string,
 }

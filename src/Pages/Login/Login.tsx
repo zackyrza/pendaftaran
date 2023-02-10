@@ -13,17 +13,19 @@ function Login({}: ILoginProps) {
   const [messageApi, contextHolder] = message.useMessage();
 
   const onFinishLogin = (values: any) => {
-    login(values.email, values.password)
-      .then(() => {
-        messageApi.success("Login berhasil!");
-        setTimeout(() => {
-          navigate("/pendaftaran");
-        }, 1000);
-      })
-      .catch((err) => {
-        console.log(err);
-        messageApi.error("Email atau password salah!");
-      });
+    // login(values.email, values.password)
+    //   .then(() => {
+    //     messageApi.success("Login berhasil!");
+    //     setTimeout(() => {
+    //       navigate("/pendaftaran");
+    //     }, 1000);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     messageApi.error("Email atau password salah!");
+    //   });
+    localStorage.setItem("email", values.email);
+    navigate("/pendaftaran");
   };
 
   const onFinishLoginFailed = (errorInfo: any) => {
@@ -81,7 +83,7 @@ function Login({}: ILoginProps) {
             <Input type="email" />
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             label="Password"
             name="password"
             rules={[
@@ -89,17 +91,17 @@ function Login({}: ILoginProps) {
             ]}
           >
             <Input.Password />
-          </Form.Item>
+          </Form.Item> */}
 
-          <Form.Item>
+          {/* <Form.Item>
             <Button type="text" block onClick={() => setFormType("register")}>
               Belum punya akun? Daftar sekarang!
             </Button>
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item>
             <Button type="primary" htmlType="submit" block>
-              Submit
+              Lanjut
             </Button>
           </Form.Item>
         </Form>

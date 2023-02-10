@@ -12,10 +12,19 @@ import {
   message,
 } from "antd";
 
+import Upload, {
+  RcFile,
+  UploadChangeParam,
+  UploadFile,
+  UploadProps,
+} from "antd/es/upload";
+
 import { IStep2Props } from "./Step2.d";
 import { usePendaftaran } from "Helpers/Hooks/Api/usePendaftaran";
 import { IKandidatPost } from "Helpers/Interface/Kandidat";
 import { useKandidat } from "Helpers/Hooks/Api/useKandidat";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { API_URL, IMAGE_URL } from "Config";
 
 type candidateKey =
   | "name"
@@ -35,6 +44,7 @@ type candidateKey =
   | "religion"
   | "occupation"
   | "maritalStatus"
+  | "photo"
   | "email";
 
 function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
@@ -42,8 +52,36 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
   const { createKandidat } = useKandidat();
   const [messageApi, contextHolder] = message.useMessage();
 
+  const [loadingUpload, setLoading] = React.useState<boolean>(false);
+  const [photo, setPhoto] = React.useState<string>("");
   const [current, setCurrent] = React.useState(1);
   const [candidates, setCandidates] = React.useState<IKandidatPost[]>([]);
+
+  const beforeUpload = (file: RcFile) => {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+      message.error("File yang bisa dipakai hanyalah file JPG atau PNG!");
+    }
+    const isLt10M = file.size / 1024 / 1024 < 10;
+    if (!isLt10M) {
+      message.error("Foto harus lebih kecil dari 10MB!");
+    }
+    return isJpgOrPng && isLt10M;
+  };
+
+  const handleUpload: UploadProps["onChange"] = (
+    info: UploadChangeParam<UploadFile>
+  ) => {
+    if (info.file.status === "uploading") {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === "done") {
+      // Get this url from response in real world.
+      setLoading(false);
+      setPhoto(info.file.response.data);
+    }
+  };
 
   const onChangePage: PaginationProps["onChange"] = (page) => {
     setCurrent(page);
@@ -70,6 +108,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         occupation: "",
         maritalStatus: "",
         email: "",
+        photo: "",
       });
       setCandidates(newCandidates);
     });
@@ -108,6 +147,13 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
   const renderForm = () => {
     const currIndex = current - 1;
     const currentCandidate = candidates[currIndex];
+
+    const uploadButton = (
+      <div>
+        {loadingUpload ? <LoadingOutlined /> : <PlusOutlined />}
+        <div style={{ marginTop: 8 }}>Upload</div>
+      </div>
+    );
 
     const onChange = (
       e: React.ChangeEvent<HTMLInputElement>,
@@ -303,6 +349,27 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
               { value: "belum kawin", label: "Belum Kawin" },
             ]}
           />
+        </div>
+        <div className={Styles["form-item"]}>
+          <p className={Styles["title"]}>Pas Foto</p>
+          <Upload
+            action={API_URL + "/uploads"}
+            name="file"
+            listType="picture-card"
+            beforeUpload={beforeUpload}
+            onChange={handleUpload}
+            showUploadList={false}
+          >
+            {photo ? (
+              <img
+                src={`${IMAGE_URL}${photo}`}
+                alt="avatar"
+                style={{ width: 100, height: 200, objectFit: "contain" }}
+              />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
         </div>
         <div className={Styles["form-item"]}>
           <Button
