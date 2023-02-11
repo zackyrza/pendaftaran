@@ -88,9 +88,8 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
       messageApi.success(`File ${info.file.name} berhasil di upload!`);
       setLoading(false);
       const newPhoto = [...photo];
-      newPhoto[current - 1] = `${IMAGE_URL}${info.file.response.data}`;
+      newPhoto[current - 1] = info.file.response.data;
       setPhoto(newPhoto);
-      console.log(newPhoto, "==============================");
     }
   };
 
@@ -106,9 +105,8 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
       messageApi.success(`File ${info.file.name} berhasil di upload!`);
       setLoading(false);
       const newKTP = [...ktp];
-      newKTP[current - 1] = `${IMAGE_URL}${info.file.response.data}`;
+      newKTP[current - 1] = info.file.response.data;
       setKTP(newKTP);
-      console.log(newKTP, "==============================");
     }
   };
 
@@ -124,9 +122,8 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
       messageApi.success(`File ${info.file.name} berhasil di upload!`);
       setLoading(false);
       const newIjazah = [...ijazah];
-      newIjazah[current - 1] = `${IMAGE_URL}${info.file.response.data}`;
+      newIjazah[current - 1] = info.file.response.data;
       setIjazah(newIjazah);
-      console.log(newIjazah, "==============================");
     }
   };
 
@@ -195,15 +192,9 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
       candidates.forEach(async (element, index) => {
         createKandidat({
           ...element,
-          photo: photo[index].split(
-            "http://pendaftaran-backend.mitraniagateknologi.com/"
-          )[1],
-          ktp: ktp[index].split(
-            "http://pendaftaran-backend.mitraniagateknologi.com/"
-          )[1],
-          ijazah: ijazah[index].split(
-            "http://pendaftaran-backend.mitraniagateknologi.com/"
-          )[1],
+          photo: photo[index],
+          ktp: ktp[index],
+          ijazah: ijazah[index],
         });
       });
       messageApi.success("Para peserta berhasil didaftarkan");
@@ -432,9 +423,9 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             onChange={handleUpload}
             showUploadList={false}
           >
-            {photo[current] ? (
+            {photo[current - 1] ? (
               <img
-                src={`${IMAGE_URL}${photo[current]}`}
+                src={`${IMAGE_URL}${photo[current - 1]}`}
                 alt="avatar"
                 style={{ width: 100, height: 100, objectFit: "contain" }}
               />
@@ -453,9 +444,9 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             onChange={handleUploadKTP}
             showUploadList={false}
           >
-            {ktp[current] ? (
+            {ktp[current - 1] ? (
               <img
-                src={`${IMAGE_URL}${ktp[current]}`}
+                src={`${IMAGE_URL}${ktp[current - 1]}`}
                 alt="avatar"
                 style={{ width: 100, height: 100, objectFit: "contain" }}
               />
@@ -475,9 +466,9 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             onChange={handleUploadIjazah}
             showUploadList={false}
           >
-            {ijazah[current] ? (
+            {ijazah[current - 1] ? (
               <img
-                src={`${IMAGE_URL}${ijazah[current]}`}
+                src={`${IMAGE_URL}${ijazah[current - 1]}`}
                 alt="avatar"
                 style={{ width: 100, height: 100, objectFit: "contain" }}
               />
