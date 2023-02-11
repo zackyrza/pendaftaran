@@ -84,9 +84,9 @@ function Login({}: ILoginProps) {
           </Form.Item>
 
           <p className={Styles["notes"]}>
-            *Pastikan alamat email anda harus benar sesuai dengan cabor masing"
-            dan kabupaten/kota karena data yg anda masukkan akan masuk ke dalam
-            email dan dapat di download serta di print
+            * Pastikan alamat email anda harus benar sesuai dengan cabang
+            olahraga masing - masing dan kabupaten/kota. Data yg anda masukkan
+            akan masuk ke dalam email dan dapat di download serta di print.
           </p>
 
           {/* <Form.Item
