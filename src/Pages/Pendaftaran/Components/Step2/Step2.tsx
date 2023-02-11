@@ -195,9 +195,15 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
       candidates.forEach(async (element, index) => {
         createKandidat({
           ...element,
-          photo: photo[index],
-          ktp: ktp[index],
-          ijazah: ijazah[index],
+          photo: photo[index].split(
+            "http://pendaftaran-backend.mitraniagateknologi.com/"
+          )[1],
+          ktp: ktp[index].split(
+            "http://pendaftaran-backend.mitraniagateknologi.com/"
+          )[1],
+          ijazah: ijazah[index].split(
+            "http://pendaftaran-backend.mitraniagateknologi.com/"
+          )[1],
         });
       });
       messageApi.success("Para peserta berhasil didaftarkan");
