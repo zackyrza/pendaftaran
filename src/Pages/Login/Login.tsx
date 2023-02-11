@@ -83,6 +83,12 @@ function Login({}: ILoginProps) {
             <Input type="email" />
           </Form.Item>
 
+          <p className={Styles["notes"]}>
+            *Pastikan alamat email anda harus benar sesuai dengan cabor masing"
+            dan kabupaten/kota karena data yg anda masukkan akan masuk ke dalam
+            email dan dapat di download serta di print
+          </p>
+
           {/* <Form.Item
             label="Password"
             name="password"
