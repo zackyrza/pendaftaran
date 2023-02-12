@@ -50,8 +50,8 @@ function Home({}: IHomeProps) {
               </li>
               <li>
                 <p className={Styles["text"]}>
-                  Persiapkan email perwakilan dengan format (Cabang # Daerah)
-                  ex: pobsikotim@gmail.com
+                  Persiapkan email perwakilan dengan format (Cabang # Daerah),
+                  Contoh: pobsikotim@gmail.com
                 </p>
               </li>
               <li>
