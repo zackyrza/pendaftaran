@@ -45,24 +45,36 @@ function Home({}: IHomeProps) {
             <ul>
               <li>
                 <p className={Styles["text"]}>
+                  Pastikan koneksi Internet anda stabil
+                </p>
+              </li>
+              <li>
+                <p className={Styles["text"]}>
                   Pendaftaran dilakukan oleh perwakilan
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
-                  Persiapkan email perwakilan dengan format (Cabang # Daerah),
-                  Contoh: pobsikotim@gmail.com
+                  Persiapkan email perwakilan dengan format <br /> (Cabang #
+                  Daerah), Contoh: pobsikotim@gmail.com
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
-                  Persiapkan data identitas atlet yang akan didaftarkan (Pas
-                  foto + Foto KTP + Ijazah)
+                  Persiapkan data identitas atlet yang akan di <br />
+                  daftarkan (Pas foto + Foto KTP + Ijazah)
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
                   Selesaikan dan isi form pendaftaran sesuai petunjuk
+                </p>
+              </li>
+              <li>
+                <p className={Styles["text"]}>
+                  Untuk file yang diupload maksimal adalah 10 MB. <br /> Jika
+                  file lebih dari 10 MB, silahkan compress <br /> file tersebut
+                  terlebih dahulu
                 </p>
               </li>
             </ul>
