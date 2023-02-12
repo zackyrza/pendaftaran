@@ -10,12 +10,8 @@ function Pendaftaran({}: IPendaftaranProps) {
   const [step, setStep] = React.useState(1);
   const [registrationId, setRegistrationId] = React.useState(0);
   const [city, setCity] = React.useState<string>("Barito Selatan");
-  const [candidates, setCandidates] = React.useState<string[]>([
-    "Rifqy Zacky Ariadhy",
-  ]);
-  const [photo, setPhoto] = React.useState<string[]>([
-    "uploads/1621958688451-1676087130751.jpeg",
-  ]);
+  const [candidates, setCandidates] = React.useState<string[]>([]);
+  const [photo, setPhoto] = React.useState<string[]>([]);
 
   const handleToStep2 = (regId: number) => {
     setRegistrationId(regId);
@@ -30,10 +26,11 @@ function Pendaftaran({}: IPendaftaranProps) {
         return (
           <Step2
             registrationId={registrationId}
-            onSuccessfulSubmit={(city, candidatesName) => {
+            onSuccessfulSubmit={(city, candidatesName, photo) => {
               setStep(3);
               setCity(city);
               setCandidates(candidatesName);
+              setPhoto(photo);
             }}
           />
         );
