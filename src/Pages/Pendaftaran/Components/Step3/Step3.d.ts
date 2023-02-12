@@ -3,4 +3,5 @@ export interface IStep3Props {
     candidates: string[];
     photo: string[];
     status: string[];
+    back: () => void;
 }

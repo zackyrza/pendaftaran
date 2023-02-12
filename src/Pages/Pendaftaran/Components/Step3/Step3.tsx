@@ -2,14 +2,14 @@ import React from "react";
 import Styles from "./Step3.module.scss";
 
 import { Button } from "antd";
-import { PrinterOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useReactToPrint } from "react-to-print";
 
 import { IStep3Props } from "./Step3.d";
 import { IMAGE_URL } from "Config";
 import background from "Images/id-card-bg.png";
 
-function Step3({ candidates, city, photo, status }: IStep3Props) {
+function Step3({ candidates, city, photo, status, back }: IStep3Props) {
   const componentRef = React.useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -200,9 +200,20 @@ function Step3({ candidates, city, photo, status }: IStep3Props) {
   return (
     <div className={Styles["wrapper"]}>
       <div className={Styles["page-title"]}>
-        <p>Pencetakan Kartu Peserta</p>
+        <p>
+          Terimakasih telah mendaftar sampai bertemu di PORPROV XII Kalimantan
+          Tengah, Kotawaringin Timur
+        </p>
       </div>
-      {renderPrint()}
+      <Button
+        type="primary"
+        icon={<ArrowLeftOutlined />}
+        size={"large"}
+        onClick={back}
+      >
+        Kembali ke pendaftaran
+      </Button>
+      {/* {renderPrint()}
       <div className={Styles["render"]}>{renderCard()}</div>
       <div className={Styles["print-button"]}>
         <Button
@@ -213,7 +224,7 @@ function Step3({ candidates, city, photo, status }: IStep3Props) {
         >
           Cetak
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

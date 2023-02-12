@@ -43,6 +43,14 @@ function Pendaftaran({}: IPendaftaranProps) {
             city={city}
             candidates={candidates}
             status={status}
+            back={() => {
+              setStep(1);
+              setCity("");
+              setCandidates([]);
+              setPhoto([]);
+              setStatus([]);
+              setRegistrationId(0);
+            }}
           />
         );
       default:
