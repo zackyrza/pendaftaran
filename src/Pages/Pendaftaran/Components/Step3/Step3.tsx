@@ -201,8 +201,8 @@ function Step3({ candidates, city, photo, status, back }: IStep3Props) {
     <div className={Styles["wrapper"]}>
       <div className={Styles["page-title"]}>
         <p>
-          Terimakasih telah mendaftar sampai bertemu di PORPROV XII Kalimantan
-          Tengah, Kotawaringin Timur
+          Terimakasih telah mendaftar! <br /> Sampai bertemu di <br /> PORPROV
+          XII Kalimantan Tengah, Kotawaringin Timur
         </p>
       </div>
       <Button

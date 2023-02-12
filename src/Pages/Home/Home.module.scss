@@ -49,9 +49,9 @@
             background-repeat: no-repeat;
             background-position: center;
             width: 1000px !important;
-            height: fit-content !important;
+            height: 562.5px !important;
             position: relative;
-            background-color: #9f1917;
+            background-color: #9f1917;;
             .modal__title {
                 width: 100%;
                 display: flex;
@@ -81,6 +81,8 @@
             }
             .modal__body {
                 margin-top: 25px;
+                overflow-y: auto;
+                height: 450px !important;
                 ul {
                     margin: 0px 50px;
                     li {
