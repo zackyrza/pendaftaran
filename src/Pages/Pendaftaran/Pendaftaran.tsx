@@ -12,6 +12,7 @@ function Pendaftaran({}: IPendaftaranProps) {
   const [city, setCity] = React.useState<string>("");
   const [candidates, setCandidates] = React.useState<string[]>([]);
   const [photo, setPhoto] = React.useState<string[]>([]);
+  const [status, setStatus] = React.useState<string[]>([]);
 
   const handleToStep2 = (regId: number) => {
     setRegistrationId(regId);
@@ -26,16 +27,24 @@ function Pendaftaran({}: IPendaftaranProps) {
         return (
           <Step2
             registrationId={registrationId}
-            onSuccessfulSubmit={(city, candidatesName, photo) => {
+            onSuccessfulSubmit={(city, candidatesName, photo, status) => {
               setStep(3);
               setCity(city);
               setCandidates(candidatesName);
               setPhoto(photo);
+              setStatus(status);
             }}
           />
         );
       case 3:
-        return <Step3 photo={photo} city={city} candidates={candidates} />;
+        return (
+          <Step3
+            photo={photo}
+            city={city}
+            candidates={candidates}
+            status={status}
+          />
+        );
       default:
         return <Step1 goToStep2={handleToStep2} />;
     }

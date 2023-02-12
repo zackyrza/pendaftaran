@@ -205,7 +205,8 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         onSuccessfulSubmit(
           pendaftaranDetail.city?.name ?? "Kotawaringin Timur",
           candidates.map((e) => e.name),
-          photo
+          photo,
+          candidates.map((e) => e.status)
         );
       }, 1000);
     } catch (error) {

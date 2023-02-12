@@ -9,7 +9,7 @@ import { IStep3Props } from "./Step3.d";
 import { IMAGE_URL } from "Config";
 import background from "Images/id-card-bg.png";
 
-function Step3({ candidates, city, photo }: IStep3Props) {
+function Step3({ candidates, city, photo, status }: IStep3Props) {
   const componentRef = React.useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -28,7 +28,7 @@ function Step3({ candidates, city, photo }: IStep3Props) {
             <p>{city}</p>
           </div>
           <div className={Styles["card__position"]}>
-            <p>ATLET</p>
+            <p>{status[index].toUpperCase()}</p>
           </div>
           <div className={Styles["card__location"]}>
             <p>Kotawaringin Timur - 19 Juni 2023</p>
@@ -143,7 +143,7 @@ function Step3({ candidates, city, photo }: IStep3Props) {
                   textOverflow: "ellipsis",
                 }}
               >
-                ATLET
+                {status[index].toUpperCase()}
               </p>
             </div>
             <div
