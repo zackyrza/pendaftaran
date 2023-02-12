@@ -4,10 +4,18 @@ import Styles from "./Pendaftaran.module.scss";
 import { IPendaftaranProps } from "./Pendaftaran.d";
 import Step1 from "./Components/Step1";
 import Step2 from "./Components/Step2";
+import Step3 from "./Components/Step3/Step3";
 
 function Pendaftaran({}: IPendaftaranProps) {
-  const [step, setStep] = React.useState(1);
-  const [registrationId, setRegistrationId] = React.useState(0);
+  const [step, setStep] = React.useState(3);
+  const [registrationId, setRegistrationId] = React.useState(35);
+  const [city, setCity] = React.useState<string>("Barito Selatan");
+  const [candidates, setCandidates] = React.useState<string[]>([
+    "Rifqy Zacky Ariadhy",
+  ]);
+  const [photo, setPhoto] = React.useState<string[]>([
+    "uploads/1621958688451-1676087130751.jpeg",
+  ]);
 
   const handleToStep2 = (regId: number) => {
     setRegistrationId(regId);
@@ -22,12 +30,15 @@ function Pendaftaran({}: IPendaftaranProps) {
         return (
           <Step2
             registrationId={registrationId}
-            onSuccessfulSubmit={() => {
-              setStep(1);
-              setRegistrationId(0);
+            onSuccessfulSubmit={(city, candidatesName) => {
+              setStep(3);
+              setCity(city);
+              setCandidates(candidatesName);
             }}
           />
         );
+      case 3:
+        return <Step3 photo={photo} city={city} candidates={candidates} />;
       default:
         return <Step1 goToStep2={handleToStep2} />;
     }

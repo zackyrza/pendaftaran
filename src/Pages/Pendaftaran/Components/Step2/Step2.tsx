@@ -49,7 +49,9 @@ type candidateKey =
   | "photo"
   | "email"
   | "ktp"
-  | "ijazah";
+  | "ijazah"
+  | "shoesNumber"
+  | "shirtSize";
 
 function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
   const { getPendaftaranById, pendaftaranDetail } = usePendaftaran();
@@ -200,7 +202,11 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
       messageApi.success("Para peserta berhasil didaftarkan");
       sendSecondStepMail(pendaftaranDetail.classId, pendaftaranDetail.cityId);
       setTimeout(() => {
-        onSuccessfulSubmit();
+        onSuccessfulSubmit(
+          pendaftaranDetail.city?.name ?? "Kotawaringin Timur",
+          candidates.map((e) => e.name),
+          photo
+        );
       }, 1000);
     } catch (error) {
       messageApi.error("Terjadi kesalahan saat mengirim data");
@@ -411,6 +417,22 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
               { value: "kawin", label: "Kawin" },
               { value: "belum kawin", label: "Belum Kawin" },
             ]}
+          />
+        </div>
+        <div className={Styles["form-item"]}>
+          <p className={Styles["title"]}>Nomor Sepatu</p>
+          <Input
+            placeholder="Masukkan nomor sepatu peserta"
+            value={currentCandidate?.shoesNumber}
+            onChange={(e) => onChange(e, "shoesNumber")}
+          />
+        </div>
+        <div className={Styles["form-item"]}>
+          <p className={Styles["title"]}>Ukuran Baju</p>
+          <Input
+            placeholder="Masukkan ukuran baju peserta"
+            value={currentCandidate?.shirtSize}
+            onChange={(e) => onChange(e, "shirtSize")}
           />
         </div>
         <div className={Styles["form-item"]}>

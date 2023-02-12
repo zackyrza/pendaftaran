@@ -4,6 +4,8 @@
     width: 100vw;
     height: 100vh;
     background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     .button {
         position: absolute;
         left: 25vw;
@@ -23,6 +25,74 @@
             -webkit-user-select: none;
             -ms-user-select: none;
             user-select: none;
+        }
+    }
+    .modal {
+        transition: ease-out 0.25s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        &.isOpen {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        &.isClosed {
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+        .modal__content {
+            background-image: url('./../../Images/popup-bg.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 1000px !important;
+            height: 562.5px !important;
+            position: relative;
+            .modal__title {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-self: center;
+                margin: 10px 0;
+                .text {
+                    font-size: 40px;
+                    font-weight: 600;
+                    color: #fff;
+                    margin: 0;
+                    text-align: center;
+                    -webkit-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+            }
+            .modal__close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                .icon {
+                    font-size: 25px;
+                    color: #000;
+                }
+            }
+            .modal__body {
+                margin-top: 25px;
+                ul {
+                    margin: 0px 50px;
+                    li {
+                        color: #fff;
+                        margin-bottom: 20px;
+                        .text {
+                            font-size: 25px;
+                            color: #fff;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
         }
     }
 }
