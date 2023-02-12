@@ -237,20 +237,11 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
       setCandidates(newCandidates);
     };
 
-    const handleChange = (value: string) => {
+    const handleChangeSelect = (value: string, key: string) => {
       const newCandidates = [...candidates];
       newCandidates[currIndex] = {
         ...newCandidates[currIndex],
-        gender: value,
-      };
-      setCandidates(newCandidates);
-    };
-
-    const handleChangeMarital = (value: string) => {
-      const newCandidates = [...candidates];
-      newCandidates[currIndex] = {
-        ...newCandidates[currIndex],
-        maritalStatus: value,
+        [key]: value,
       };
       setCandidates(newCandidates);
     };
@@ -296,10 +287,15 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         </div>
         <div className={Styles["form-item"]}>
           <p className={Styles["title"]}>Status pada Kontingen</p>
-          <Input
-            placeholder="Masukkan status peserta"
+          <Select
+            placeholder={"Masukkan Status kontingen"}
             value={currentCandidate?.status}
-            onChange={(e) => onChange(e, "status")}
+            style={{ width: "100%" }}
+            onChange={(value) => handleChangeSelect(value, "status")}
+            options={[
+              { value: "atlet", label: "Atlet" },
+              { value: "official", label: "Official" },
+            ]}
           />
         </div>
         <div className={Styles["form-item"]}>
@@ -308,7 +304,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             placeholder={"Masukkan Jenis Kelamin peserta"}
             value={currentCandidate?.gender}
             style={{ width: "100%" }}
-            onChange={handleChange}
+            onChange={(value) => handleChangeSelect(value, "gender")}
             options={[
               { value: "laki-laki", label: "Laki - Laki" },
               { value: "perempuan", label: "Perempuan" },
@@ -342,26 +338,47 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         </div>
         <div className={Styles["form-item"]}>
           <p className={Styles["title"]}>Pendidikan Terakhir</p>
-          <Input
-            placeholder="Masukkan pendidikan terakhir peserta"
+          <Select
+            placeholder={"Masukkan pendidikan terakhir peserta"}
             value={currentCandidate?.education}
-            onChange={(e) => onChange(e, "education")}
+            style={{ width: "100%" }}
+            onChange={(value) => handleChangeSelect(value, "education")}
+            options={[
+              { value: "SD", label: "SD" },
+              { value: "SMP", label: "SMP" },
+              { value: "SMA", label: "SMA" },
+              { value: "Diploma", label: "Diploma" },
+              { value: "S1", label: "S1" },
+              { value: "S2", label: "S2" },
+            ]}
           />
         </div>
         <div className={Styles["form-item"]}>
           <p className={Styles["title"]}>Golongan Darah</p>
-          <Input
-            placeholder="Masukkan golongan darah peserta"
+          <Select
+            placeholder={"Masukkan golongan darah peserta"}
             value={currentCandidate?.bloodType}
-            onChange={(e) => onChange(e, "bloodType")}
+            style={{ width: "100%" }}
+            onChange={(value) => handleChangeSelect(value, "bloodType")}
+            options={[
+              { value: "A", label: "A" },
+              { value: "O", label: "O" },
+              { value: "B", label: "B" },
+              { value: "AB", label: "AB" },
+            ]}
           />
         </div>
         <div className={Styles["form-item"]}>
           <p className={Styles["title"]}>Rhesus</p>
-          <Input
-            placeholder="Masukkan tipe rhesus peserta"
+          <Select
+            placeholder={"Masukkan tipe rhesus peserta"}
             value={currentCandidate?.rhesusType}
-            onChange={(e) => onChange(e, "rhesusType")}
+            style={{ width: "100%" }}
+            onChange={(value) => handleChangeSelect(value, "rhesusType")}
+            options={[
+              { value: "+", label: "+" },
+              { value: "-", label: "-" },
+            ]}
           />
         </div>
         <div className={Styles["form-item"]}>
@@ -413,7 +430,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             placeholder={"Masukkan Status perkawinan peserta"}
             value={currentCandidate?.maritalStatus}
             style={{ width: "100%" }}
-            onChange={handleChangeMarital}
+            onChange={(value) => handleChangeSelect(value, "maritalStatus")}
             options={[
               { value: "kawin", label: "Kawin" },
               { value: "belum kawin", label: "Belum Kawin" },

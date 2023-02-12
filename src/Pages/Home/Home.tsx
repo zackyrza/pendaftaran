@@ -45,36 +45,50 @@ function Home({}: IHomeProps) {
             <ul>
               <li>
                 <p className={Styles["text"]}>
-                  Pastikan koneksi Internet anda stabil
+                  Pastikan koneksi Internet stabil.
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
-                  Pendaftaran dilakukan oleh perwakilan
+                  Pendaftaran dilakukan oleh perwakilan masing – masing <br />
+                  cabang olahraga.
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
-                  Persiapkan email perwakilan dengan format <br /> (Cabang #
-                  Daerah), Contoh: pobsikotim@gmail.com
+                  Persiapan email perwakilan cabang olahraga.
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
-                  Persiapkan data identitas atlet yang akan di <br />
-                  daftarkan (Pas foto + Foto KTP + Ijazah)
+                  Persiapkan data identitas atlet yang akan didaftarkan <br />{" "}
+                  dalam format jpg, .png (Pas Foto, KTP dan Ijazah).
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
-                  Selesaikan dan isi form pendaftaran sesuai petunjuk
+                  Isi dan selesaikan Form pendaftaran sesuai petunjuk.
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
-                  Untuk file yang diupload maksimal adalah 10 MB. <br /> Jika
-                  file lebih dari 10 MB, silahkan compress <br /> file tersebut
-                  terlebih dahulu
+                  File yang di upload maksimal 10 MB <br /> ( Kompres file
+                  terlebih dahulu jika melebihi kapasitas maksimal ).
+                </p>
+              </li>
+              <li>
+                <p className={Styles["text"]}>
+                  Dokumen pendaftaran yang diterima  DICETAK dan <br />
+                  di verifikasi oleh Ketua/Sekretaris KONI Kabupaten/ Kota{" "}
+                  <br />
+                  dan Ketua/ Sekretars Pengkab/ Pengkot <br /> (Stampel dan TTD
+                  Basah).
+                </p>
+              </li>
+              <li>
+                <p className={Styles["text"]}>
+                  Berkas pendaftaran Tahap 1 & 2 WAJIB di bawa <br />
+                  pada saat pendaftaran Tahap 3 di KONI Kotawaringin Timur.
                 </p>
               </li>
             </ul>

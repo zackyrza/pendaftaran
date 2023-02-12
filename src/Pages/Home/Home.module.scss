@@ -49,8 +49,9 @@
             background-repeat: no-repeat;
             background-position: center;
             width: 1000px !important;
-            height: 562.5px !important;
+            height: fit-content !important;
             position: relative;
+            background-color: #9f1917;
             .modal__title {
                 width: 100%;
                 display: flex;
