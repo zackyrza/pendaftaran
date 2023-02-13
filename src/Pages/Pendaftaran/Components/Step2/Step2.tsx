@@ -450,6 +450,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         </div>
         <div className={Styles["form-item"]}>
           <p className={Styles["title"]}>Pas Foto</p>
+          <p className={Styles["title-required"]}>*Wajib diisi</p>
           <Upload
             action={API_URL + "/uploads"}
             name="file"
@@ -471,6 +472,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         </div>
         <div className={Styles["form-item"]}>
           <p className={Styles["title"]}>Foto KTP</p>
+          <p className={Styles["title-required"]}>*Wajib diisi</p>
           <Upload
             action={API_URL + "/uploads"}
             name="file"
