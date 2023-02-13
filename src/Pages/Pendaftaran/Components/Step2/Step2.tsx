@@ -493,7 +493,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         <div className={Styles["form-item"]}>
           <p className={Styles["title"]}>Foto Ijazah</p>
           <p className={Styles["title-note"]}>
-            *Hanya atlet yang berusia {">"} 17 Tahun yang wajib mengupload
+            *Hanya atlet yang berusia {"<"} 17 Tahun yang wajib mengupload
           </p>
           <Upload
             action={API_URL + "/uploads"}
