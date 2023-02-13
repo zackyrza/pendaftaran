@@ -7,8 +7,8 @@ import Step2 from "./Components/Step2";
 import Step3 from "./Components/Step3/Step3";
 
 function Pendaftaran({}: IPendaftaranProps) {
-  const [step, setStep] = React.useState(1);
-  const [registrationId, setRegistrationId] = React.useState(0);
+  const [step, setStep] = React.useState(2);
+  const [registrationId, setRegistrationId] = React.useState(35);
   const [city, setCity] = React.useState<string>("");
   const [candidates, setCandidates] = React.useState<string[]>([]);
   const [photo, setPhoto] = React.useState<string[]>([]);
