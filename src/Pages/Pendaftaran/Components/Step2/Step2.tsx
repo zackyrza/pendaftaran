@@ -172,17 +172,12 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
       candidates.forEach(async (element) => {
         const keys = Object.keys(element);
         keys.forEach((key) => {
-          if (
-            key === "rhesusType" ||
-            key === "photo" ||
-            key === "ktp" ||
-            key === "ijazah"
-          )
-            return;
+          if (key === "rhesusType" || key === "ijazah") return;
           if (
             element[key as candidateKey] === "" ||
             !element[key as candidateKey]
           ) {
+            console.log(key, "==============================");
             anyEmpty = true;
           }
         });
@@ -497,7 +492,9 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
         </div>
         <div className={Styles["form-item"]}>
           <p className={Styles["title"]}>Foto Ijazah</p>
-          <p className={Styles["title-note"]}>*Khusus atlet</p>
+          <p className={Styles["title-note"]}>
+            *Hanya atlet yang berusia {">"} 17 Tahun yang wajib mengupload
+          </p>
           <Upload
             action={API_URL + "/uploads"}
             name="file"
