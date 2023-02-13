@@ -169,18 +169,32 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
   const onSubmit = async () => {
     try {
       let anyEmpty = false;
-      candidates.forEach(async (element) => {
+      candidates.forEach(async (element, index) => {
         const keys = Object.keys(element);
-        keys.forEach((key) => {
+        for await (const key of keys) {
           if (key === "rhesusType" || key === "ijazah") return;
+          if (key === "photo") {
+            if (!photo[index] || photo[index] === "") {
+              anyEmpty = true;
+              return;
+            }
+            continue;
+          }
+          if (key === "ktp") {
+            if (!ktp[index] || ktp[index] === "") {
+              anyEmpty = true;
+              return;
+            }
+            continue;
+          }
+
           if (
             element[key as candidateKey] === "" ||
             !element[key as candidateKey]
           ) {
-            console.log(key, "==============================");
             anyEmpty = true;
           }
-        });
+        }
       });
       if (anyEmpty) {
         messageApi.error("Mohon isi semua data");
