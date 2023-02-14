@@ -51,12 +51,12 @@ function Home({}: IHomeProps) {
               <li>
                 <p className={Styles["text"]}>
                   Pendaftaran dilakukan oleh perwakilan masing – masing <br />
-                  cabang olahraga.
+                  KONI Kabupaten / Kota.
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
-                  Persiapan email perwakilan cabang olahraga.
+                  Persiapan email perwakilan KONI Kabupaten / Kota.
                 </p>
               </li>
               <li>
