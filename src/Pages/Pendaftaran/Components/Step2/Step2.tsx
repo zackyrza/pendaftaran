@@ -220,7 +220,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             continue;
           }
           if (key === "ktp") {
-            if (ktp[index] === "") {
+            if (ktp[index] === "" && element.age > 17) {
               emptyMsg = "KTP anda tidak boleh kosong";
               anyEmpty = true;
               continue;
@@ -504,28 +504,30 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             )}
           </Upload>
         </div>
-        <div className={Styles["form-item"]}>
-          <p className={Styles["title"]}>Foto KTP</p>
-          <p className={Styles["title-required"]}>*Wajib diisi</p>
-          <Upload
-            action={API_URL + "/uploads"}
-            name="file"
-            listType="picture-card"
-            beforeUpload={beforeUpload}
-            onChange={handleUploadKTP}
-            showUploadList={false}
-          >
-            {ktp[current - 1] ? (
-              <img
-                src={`${IMAGE_URL}${ktp[current - 1]}`}
-                alt="avatar"
-                style={{ width: 100, height: 100, objectFit: "contain" }}
-              />
-            ) : (
-              uploadButton
-            )}
-          </Upload>
-        </div>
+        {currentCandidate.age > 17 && (
+          <div className={Styles["form-item"]}>
+            <p className={Styles["title"]}>Foto KTP</p>
+            <p className={Styles["title-required"]}>*Wajib diisi</p>
+            <Upload
+              action={API_URL + "/uploads"}
+              name="file"
+              listType="picture-card"
+              beforeUpload={beforeUpload}
+              onChange={handleUploadKTP}
+              showUploadList={false}
+            >
+              {ktp[current - 1] ? (
+                <img
+                  src={`${IMAGE_URL}${ktp[current - 1]}`}
+                  alt="avatar"
+                  style={{ width: 100, height: 100, objectFit: "contain" }}
+                />
+              ) : (
+                uploadButton
+              )}
+            </Upload>
+          </div>
+        )}
         <div className={Styles["form-item"]}>
           <p className={Styles["title"]}>Foto Ijazah</p>
           <p className={Styles["title-note"]}>
