@@ -76,21 +76,6 @@ function Home({}: IHomeProps) {
                   terlebih dahulu jika melebihi kapasitas maksimal ).
                 </p>
               </li>
-              <li>
-                <p className={Styles["text"]}>
-                  Dokumen pendaftaran yang diterima  DICETAK dan <br />
-                  di verifikasi oleh Ketua/Sekretaris KONI Kabupaten/ Kota{" "}
-                  <br />
-                  dan Ketua/ Sekretars Pengkab/ Pengkot <br /> (Stampel dan TTD
-                  Basah).
-                </p>
-              </li>
-              <li>
-                <p className={Styles["text"]}>
-                  Berkas pendaftaran Tahap 1 & 2 WAJIB di bawa <br />
-                  pada saat pendaftaran Tahap 3 di KONI Kotawaringin Timur.
-                </p>
-              </li>
             </ul>
           </div>
         </div>
