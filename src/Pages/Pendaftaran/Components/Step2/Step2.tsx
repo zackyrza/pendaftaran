@@ -504,7 +504,7 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             )}
           </Upload>
         </div>
-        {currentCandidate.age > 17 && (
+        {currentCandidate && currentCandidate.age > 17 && (
           <div className={Styles["form-item"]}>
             <p className={Styles["title"]}>Foto KTP</p>
             <p className={Styles["title-required"]}>*Wajib diisi</p>
