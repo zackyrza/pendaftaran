@@ -169,21 +169,61 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
   const onSubmit = async () => {
     try {
       let anyEmpty = false;
+      let emptyMsg = "";
+
+      const continueAction = async () => {
+        if (anyEmpty) {
+          messageApi.error(emptyMsg);
+          return;
+        }
+        candidates.forEach(async (element, index) => {
+          createKandidat({
+            ...element,
+            photo: photo[index],
+            ktp: ktp[index],
+            ijazah: ijazah[index],
+          });
+        });
+        messageApi.success("Para peserta berhasil didaftarkan");
+        sendSecondStepMail(pendaftaranDetail.classId, pendaftaranDetail.cityId);
+        setTimeout(() => {
+          onSuccessfulSubmit(
+            pendaftaranDetail.city?.name ?? "Kotawaringin Timur",
+            candidates.map((e) => e.name),
+            photo,
+            candidates.map((e) => e.status)
+          );
+        }, 1000);
+      };
+
       candidates.forEach(async (element, index) => {
         const keys = Object.keys(element);
         for await (const key of keys) {
-          if (key === "rhesusType" || key === "ijazah") return;
-          if (key === "photo") {
-            if (!photo[index] || photo[index] === "") {
+          if (key === "rhesusType") continue;
+          if (key === "ijazah") {
+            if (ijazah[index] === "" && element.age < 17) {
+              emptyMsg =
+                "Ijazah anda tidak boleh kosong karena peserta ini masih berusia " +
+                element.age +
+                " tahun";
               anyEmpty = true;
-              return;
+              continue;
+            }
+            continue;
+          }
+          if (key === "photo") {
+            if (photo[index] === "") {
+              emptyMsg = "Pas Foto anda tidak boleh kosong";
+              anyEmpty = true;
+              continue;
             }
             continue;
           }
           if (key === "ktp") {
-            if (!ktp[index] || ktp[index] === "") {
+            if (ktp[index] === "") {
+              emptyMsg = "KTP anda tidak boleh kosong";
               anyEmpty = true;
-              return;
+              continue;
             }
             continue;
           }
@@ -192,32 +232,12 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
             element[key as candidateKey] === "" ||
             !element[key as candidateKey]
           ) {
+            emptyMsg = "Mohon isi semua data";
             anyEmpty = true;
           }
         }
+        if (index === candidates.length - 1) continueAction();
       });
-      if (anyEmpty) {
-        messageApi.error("Mohon isi semua data");
-        return;
-      }
-      candidates.forEach(async (element, index) => {
-        createKandidat({
-          ...element,
-          photo: photo[index],
-          ktp: ktp[index],
-          ijazah: ijazah[index],
-        });
-      });
-      messageApi.success("Para peserta berhasil didaftarkan");
-      sendSecondStepMail(pendaftaranDetail.classId, pendaftaranDetail.cityId);
-      setTimeout(() => {
-        onSuccessfulSubmit(
-          pendaftaranDetail.city?.name ?? "Kotawaringin Timur",
-          candidates.map((e) => e.name),
-          photo,
-          candidates.map((e) => e.status)
-        );
-      }, 1000);
     } catch (error) {
       messageApi.error("Terjadi kesalahan saat mengirim data");
     }
