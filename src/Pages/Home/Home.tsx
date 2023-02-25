@@ -67,12 +67,18 @@ function Home({}: IHomeProps) {
               </li>
               <li>
                 <p className={Styles["text"]}>
+                  Pastikan foto yang ingin di upload memiliki rasio 1:1
+                  (Berukuran persegi).
+                </p>
+              </li>
+              <li>
+                <p className={Styles["text"]}>
                   Isi dan selesaikan Form pendaftaran sesuai petunjuk.
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
-                  File yang di upload maksimal 10 MB <br /> ( Kompres file
+                  File yang di upload maksimal 1 MB <br /> ( Kompres file
                   terlebih dahulu jika melebihi kapasitas maksimal ).
                 </p>
               </li>

@@ -71,11 +71,11 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
     if (!isJpgOrPng) {
       message.error("File yang bisa dipakai hanyalah file JPG atau PNG!");
     }
-    const isLt10M = file.size / 1024 / 1024 < 10;
-    if (!isLt10M) {
-      message.error("Foto harus lebih kecil dari 10MB!");
+    const isLt1M = file.size / 1024 / 1024 < 1.2;
+    if (!isLt1M) {
+      message.error("Foto harus lebih kecil dari 1MB!");
     }
-    return isJpgOrPng && isLt10M;
+    return isJpgOrPng && isLt1M;
   };
 
   const handleUpload: UploadProps["onChange"] = (
