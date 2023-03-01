@@ -51,18 +51,26 @@ function Home({}: IHomeProps) {
               <li>
                 <p className={Styles["text"]}>
                   Pendaftaran dilakukan oleh perwakilan masing – masing <br />
-                  KONI Kabupaten / Kota.
+                  CABOR Kabupaten / Kota.
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
-                  Persiapan email perwakilan KONI Kabupaten / Kota.
+                  Persiapan email perwakilan CABOR Kabupaten / Kota. <br />
+                  Contoh : nama cabor dan kota (pobsisukamara@gmail.com)
                 </p>
               </li>
               <li>
                 <p className={Styles["text"]}>
                   Persiapkan data identitas atlet yang akan didaftarkan <br />{" "}
                   dalam format jpg, .png (Pas Foto, KTP dan Ijazah).
+                </p>
+              </li>
+              <li>
+                <p className={Styles["text"]}>
+                  Pengisian Form tahap 1 dan 2 WAJIB Bersamaan sampai input
+                  data, <br />
+                  jadi pastikan data anda lengkap sebelum mengisi pendaftaran.
                 </p>
               </li>
               <li>
@@ -74,6 +82,11 @@ function Home({}: IHomeProps) {
               <li>
                 <p className={Styles["text"]}>
                   Isi dan selesaikan Form pendaftaran sesuai petunjuk.
+                </p>
+              </li>
+              <li>
+                <p className={Styles["text"]}>
+                  Tahap 1 dan 2 akan di tutup menjalang tahap 3.
                 </p>
               </li>
               <li>

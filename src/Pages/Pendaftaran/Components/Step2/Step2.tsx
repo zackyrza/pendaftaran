@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactEventHandler } from "react";
 import Styles from "./Step2.module.scss";
 
 import dayjs from "dayjs";
@@ -87,11 +87,23 @@ function Step2({ registrationId, onSuccessfulSubmit }: IStep2Props) {
     }
     if (info.file.status === "done") {
       // Get this url from response in real world.
-      messageApi.success(`File ${info.file.name} berhasil di upload!`);
-      setLoading(false);
-      const newPhoto = [...photo];
-      newPhoto[current - 1] = info.file.response.data;
-      setPhoto(newPhoto);
+      const img = new Image();
+      img.src = IMAGE_URL + info.file.response.data;
+      img.onload = () => {
+        const ratio = img.width / img.height;
+        if (ratio < 0.85 || ratio > 1.15) {
+          messageApi.error(
+            `Ukuran foto tidak sesuai, foto harus memiliki rasio 1:1!`
+          );
+          setLoading(false);
+          return;
+        }
+        messageApi.success(`File ${info.file.name} berhasil di upload!`);
+        setLoading(false);
+        const newPhoto = [...photo];
+        newPhoto[current - 1] = info.file.response.data;
+        setPhoto(newPhoto);
+      };
     }
   };
 
